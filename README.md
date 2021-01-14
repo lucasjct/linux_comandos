@@ -1,6 +1,25 @@
-# linux_comandos
-### Lista de comandos importantes do Linux :penguin:
+# linux_comandos 
+### Lista de comandos básicos do Linux
 
+### Navegue pelo Índice: :penguin:
+<a name="links"></a>
+* [Comandos Linux para Processos](#link1)
+* [Pesquisar dentro de um arquivo](#link2)
+* [Gerenciar situação dos processos](#link3)
+* [Gerenciar execução dos programas no terminal](#link4)
+* [Permissões e execução de scripts](#link5)
+* [Navegando entre diretórios](#link6)
+* [Procurar por arquivos ou diretórios](#link7)
+* [Alterar senhas e logar com outro usuário](#link8)
+* [Variáveis de ambiente e PATH](#link9)
+* [Contando caracteres, palarvras de um arquivo e processos em execução](#link10)
+* [Instalação de Programa, gerenciador *apt*](#link11)
+* [Utilizando o `dpkg` para instalar ou remover programas](#link12)
+* [Script de *init* e *service*](#link13)
+
+
+***
+<a id="link1"></a>
 ### Comandos Linux para Processos
 
 * `ps -e` Lista todos os procesos em execução. Seria "ps" de process?
@@ -13,12 +32,12 @@
 
 
 * `kill -9 <id do processo>` - Interrompe o processo abruptamente
-
+<a id="link2"></a>
 ### Pesquisar dentro de um arquivo
 
 * `cat arquivo.txt | grep <"termo a ser buscado">` O termo a ser busca, no caso precisa ser passado como string, então precisa de aspas.
-
-### Gerenciar a situação dos processos
+<a id="link3"></a>
+### Gerenciar situação dos processos
 
 * `top` - Lista os processos em execução, o consumos de recursos como cpu, memória ram para cada um deles. 
 
@@ -28,7 +47,7 @@
 
 * `killall <nome do processo>` Mata o conjunto de processos de um mesmo programa
 * `killall <nome do processo> -9 ` Mato todo os processos de um software de maneira definitiva
-
+<a id="link4"></a>
 ### TERMINAL - Gerenciar execução dos programas no terminal
 
 * `pstree` - Exibe a árvores de processos.
@@ -39,7 +58,7 @@
 * Para trazer o programa para o terminal e deixá-lo travado, `fg`.
 
 * Para executar um programa em background e liberar o terminal desde o ínicio, devemos abrí-lo com o __&__ . Por exemplo: `gedit &`
-
+<a id="link5"></a>
 ### Permissões e execução de scripts
 
  * O Linux pode interpretar scripts bash (extensão `.sh`),entre outros programas. Todos arquivos, programas e diretórios, possuem três tipos de permissões: escrita (`w`), leitura (`r`) e execução  (`x`).    
@@ -51,8 +70,8 @@
  * Para  dar permissões, precisa ser o usuário administrador (que podemos ver ao digitar:  `whoami` ).  As permisões para escrita pode ser concedida, por exemplo: `chmod +w <nome-do-arquivo>`. Para execução seria: `chmod +x <nome-do-arquivo>`. Para retirar a permissão, basta digitar o sinal de subtração, ex: `chmod -w <nome-do-arquivo>`.
 
  * Para executar um arquivo bash sem permisão de execução, devemos digitar `sh nome-do-arquivo`. Após a permissão de execução (`chmod +x <nome-do-arquivo>`), podemos  executá-lo com: "`./<nome-do-arquivo>`".
-
-### Navegando entre pastas
+<a id="link6"></a>
+### Navegando entre diretórios
 
 __obs:__
  `Sempre que quisermos nos referir ao diretório do usuário (/home/nome_do_usuario/), podemos utilizar o ~. `
@@ -60,17 +79,18 @@ __obs:__
 * Se estivermos no diretório `usr/bin` e quisermos voltar o diretório usuário, basta digitar: `cd ~`
 
 * Se estiver no diretório `usr/bin` e quisermos ir para o `diretorio_usuario/worspace`, basta digitarmos `cd ~/workspace`. 
+<a id="link7"></a>
 ### Procurar por arquivos ou diretórios:
 * `find <diretório ou arquivo>`
 * Caso eu queira encontra algum caminho de algum arquivo ou programa em específico, posso digitar `which <programa>`. Os programas vão retonar o diretório `/usr/bin/meu_programa`. Os programas dentro deste diretório serão executados em qualquer parte do sistema. Sempre precisa ter permissão de superusuário para mover arquivos para lá.
-
+<a id="link8"></a>
 ### Alterar senhas e logar com outro usuário
 
 + Para alterar a senha do usuário atual, utilizamos o comando `passwd`. Para alterar a senha do usuário root, utilizamos ``$ sudo passwd`.
 
 * Para logarmos com outro usuário, digitamos `su <nome usuário>`
 
-
+<a id="link9"></a>
 ### Variáveis de ambiente e PATH
 
 Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável de ambiente, podemos executá-la de qualquer lugar do sistema operacional. Por exemplo, criando uma programa em bash, no diretório __workspace__, quando seu diretório for configurado na variável de ambiente, poderemos executá-lo de qualquer lugar sem a necessidade de passar seu caminho absoluto. `PATH` e `HOME`, são dois exemplos de variávei de ambinte
@@ -81,8 +101,8 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 
 *"A variável PATH, guarda informações de onde estão nossos arquivos executáveis para que possamos executar um comando sem a necessidade de digitar o caminho absoluto."* Alura.
 
-
-### Contando caracteres e palarvras de um arquivo 
+<a id="link10"></a>
+### Contando caracteres, palarvras de um arquivo e processos em execução
 
 * `wc`, sem parâmetros, ele mostra as linhas, numero de palavras e bytes de um arquivo. 
 * `wc -l`, Conta o total de linhas de um arquivo ou de uma listagem.  
@@ -94,7 +114,7 @@ __Posso combinar com `Grep` e outras instruções. Ex: __
 `ps -e | grep "chrome" | wc -l ` . Aqui estou dizendo, `ps -e` pegue todos os pacotes em execução, `| grep "chrome"` filtre para os que contenham "chrome", e `| wc -l`, conte a quantidade de execução.
 
 
-
+<a id="link11"></a>
 ### Instalação de Programa, gerenciador *apt*
 
 * `apt` é o gerenciador de pacotes do Ubuntu.
@@ -106,18 +126,18 @@ __Posso combinar com `Grep` e outras instruções. Ex: __
 * `sudo apt-get install <programa>`, você pode instalar qualquer programa que queira instalar (pode basear na lista retornada com o conando acima).
 
 * `sudo apt-get remove programa`, caso queira remover o programa instalado.
-
-### Utilizando o `dpkg` para instalar ou remover
+<a id="link12"></a>
+### Utilizando o `dpkg` para instalar ou remover programas
 * Após baixar o progrma possso instalar (é necessário estar no diretório do arquivo) ou deinstalar com os seguinte comandos:  
 `dpkg -i <arquivo.deb>` instalar  
 `dpkg -r <nome do pacote>` desinstalar  
  obs: posso desinstalar com o `apt-get remove` se for da preferência.
 
-
+<a id="link13"></a>
  ### Script de *init* e *service*
 
- * Com o comando `service` posso __parar__
-ou __inicializar__ um processo. Exemplo:
+ * Com o comando `service` posso __parar__ ou __inicializar__ um processo. Exemplo:
+ 
 * Verificar a execução:   
 `ps -e | grep "vsftpd"` .  
 Caso esteja listado como executado, posso pausá-lo. Exemplo:  
