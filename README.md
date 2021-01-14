@@ -1,5 +1,5 @@
 # linux_comandos
-Lista de comandos importantes do Linux   
+### Lista de comandos importantes do Linux :penguin:
 
 ### Comandos Linux para Processos
 
