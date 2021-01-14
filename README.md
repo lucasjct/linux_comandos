@@ -12,7 +12,7 @@ Lista de comandos importantes do Linux
 * `Kill <id do processo>` - Interrompe a execução do processo
 
 
-* ` kill -9 <id do processo> ` - Interrompe o processo abruptamente
+* `kill -9 <id do processo>` - Interrompe o processo abruptamente
 
 ### Pesquisar dentro de um arquivo
 
@@ -32,7 +32,7 @@ Lista de comandos importantes do Linux
 ### TERMINAL - Gerenciar execução dos programas no terminal
 
 * `pstree` - Exibe a árvores de processos.
-* `ctrl + z` e `bg` . O primeiro comando pausa o programa aberto através do terminal (apenas o pausa, o comando `ctrl + c`, seria pra matar a execução). Porém, para o programa continuar em execução em background e liberar o terminal, após os __*ctrl + c*__ devemos rodar o `bg`.
+* `ctrl + z` e `bg` . O primeiro comando pausa o programa aberto através do terminal (apenas o pausa, o comando `ctrl + c`, seria pra matar a execução). Porém, para o programa continuar em execução em background(bg) e liberar o terminal, após os __*ctrl + c*__ devemos digitar: bg`.
 
 * Para saber quais processos estão sendo executados em background e quais processos estão parados no nosso terminal, utilizamos o comando `jobs`.
 
@@ -85,12 +85,11 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 ### Contando caracteres e palarvras de um arquivo 
 
 * `wc`, sem parâmetros, ele mostra as linhas, numero de palavras e bytes de um arquivo. 
-
-*  `wc -l`, Conta o total de linhas de um arquivo ou de uma listagem.  
-*  `wc -c`, Conta o total de caracters de um arquivo.
+* `wc -l`, Conta o total de linhas de um arquivo ou de uma listagem.  
+* `wc -c`, Conta o total de caracters de um arquivo.
 * `wc -w`, Conta o total de palavras de uma arquivos
 
-__Posso combinar com `Grep` e outras instruações. Ex: __ 
+__Posso combinar com `Grep` e outras instruções. Ex: __ 
 
 `ps -e | grep "chrome" | wc -l ` . Aqui estou dizendo, `ps -e` pegue todos os pacotes em execução, `| grep "chrome"` filtre para os que contenham "chrome", e `| wc -l`, conte a quantidade de execução.
 
@@ -134,5 +133,4 @@ __obs:__ um arquivo de inicialização e desligamento localizado em `/etc/init.d
  
  Os scripts dentro de `etc/init.d` são executados sempre que o SO é inicializado. Se quiser que um programa seja inicializado e permaneça rodadndo, basta movê-lo para essa pasta.
 
- *Verificar os serviços neste diretório: `$ ls etc/init.d
-`
+ *Verificar os serviços neste diretório: `$ ls etc/init.d`
