@@ -3,7 +3,9 @@
 
 ### Navegue pelo Índice: :penguin:
 <a name="links"></a>
+* [Comando Linux para perdir ajuda](#link-a)
 * [Comandos Linux para Processos](#link1)
+* [Adicionar ou remover diretórios]("link-b")
 * [Pesquisar dentro de um arquivo](#link2)
 * [Gerenciar situação dos processos](#link3)
 * [Gerenciar execução dos programas no terminal](#link4)
@@ -18,7 +20,21 @@
 * [Script de *init* e *service*](#link13)
 
 
-***
+***  
+<a id="link-a"></a>
+### Comando Linux para perdir ajuda  
+
+*  `man` < nome_comando>  
+ex:  
+`mkdir man`   
+
+<a id="link-b"></a>
+###  Comando para criar e remover diretório
+* Criar:  `mkdir novo_diretorio`  
+* Remover: `rm novo_diretorio`  
+* Remover sem mensagem de erro:  `rm -f  novo_diretório`  
+* Remover diretorio vazio:  `rmdir novo_diretorio` 
+ 
 <a id="link1"></a>
 ### Comandos Linux para Processos
 
@@ -28,14 +44,18 @@
 
 * `ps -ef | grep <nome do processo a ser filtrado>`  Pesquisa o processo específico. O grep direciona a saída do comando e filtra por um termo desejado
 
+* `ps axu`  Também retorna detalhadamente as informações dos processos executados.
+
 * `Kill <id do processo>` - Interrompe a execução do processo
 
 
 * `kill -9 <id do processo>` - Interrompe o processo abruptamente
+
 <a id="link2"></a>
 ### Pesquisar dentro de um arquivo
 
 * `cat arquivo.txt | grep <"termo a ser buscado">` O termo a ser busca, no caso precisa ser passado como string, então precisa de aspas.
+
 <a id="link3"></a>
 ### Gerenciar situação dos processos
 
@@ -47,6 +67,8 @@
 
 * `killall <nome do processo>` Mata o conjunto de processos de um mesmo programa
 * `killall <nome do processo> -9 ` Mato todo os processos de um software de maneira definitiva
+
+
 <a id="link4"></a>
 ### TERMINAL - Gerenciar execução dos programas no terminal
 
@@ -70,6 +92,8 @@
  * Para  dar permissões, precisa ser o usuário administrador (que podemos ver ao digitar:  `whoami` ).  As permisões para escrita pode ser concedida, por exemplo: `chmod +w <nome-do-arquivo>`. Para execução seria: `chmod +x <nome-do-arquivo>`. Para retirar a permissão, basta digitar o sinal de subtração, ex: `chmod -w <nome-do-arquivo>`.
 
  * Para executar um arquivo bash sem permisão de execução, devemos digitar `sh nome-do-arquivo`. Após a permissão de execução (`chmod +x <nome-do-arquivo>`), podemos  executá-lo com: "`./<nome-do-arquivo>`".
+
+
 <a id="link6"></a>
 ### Navegando entre diretórios
 
@@ -79,6 +103,11 @@ __obs:__
 * Se estivermos no diretório `usr/bin` e quisermos voltar o diretório usuário, basta digitar: `cd ~`
 
 * Se estiver no diretório `usr/bin` e quisermos ir para o `diretorio_usuario/worspace`, basta digitarmos `cd ~/workspace`. 
+
+###  Criar um Arquivo  
+*  `touch` + < nome_do_arquivo.extensão >   
+Ex: `touch tests.py`
+
 <a id="link7"></a>
 ### Procurar por arquivos ou diretórios:
 * `find <diretório ou arquivo>`
