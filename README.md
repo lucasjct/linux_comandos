@@ -5,6 +5,7 @@
 <a name="links"></a>
 * [Comando Linux para perdir ajuda](#link-a)
 * [Comandos Linux para Processos](#link1)
+* [Conteúdo de Arquivos](#link-c)
 * [Adicionar ou remover diretórios]("link-b")
 * [Pesquisar dentro de um arquivo](#link2)
 * [Gerenciar situação dos processos](#link3)
@@ -27,6 +28,10 @@
 *  `man` < nome_comando>  
 ex:  
 `mkdir man`   
+* Obter respostas de maneira sintética:    
+`whatis <comando>`  
+ex: 
+`whatis pwd`
 
 <a id="link-b"></a>
 ###  Comando para criar e remover diretório
@@ -48,13 +53,53 @@ ex:
 
 * `Kill <id do processo>` - Interrompe a execução do processo
 
-
 * `kill -9 <id do processo>` - Interrompe o processo abruptamente
+
+<a id="link-c"></a>
+### Conteúdo de Arquivos
+* Verificar conteúdo de arquivos:  
+`cat  <arquivo.txt>`  
+* Verificar espaços no arquivo:   
+`cat -A <exemplo.py>`   se retornar '^I' é TAB.  
+* Listar os registros de baixo para cima:  
+ `tac <exemplo.txt>`
+
+* Listar as últimas linhas de um arquivo:  
+ `tail <nome_arquivo.html>`  
+* Listar as últimas 5 linhas:  
+`tail -n5 <arquivo.txt>`  
+*Por padrão, o tail exibe as 10 últimas linhas.*   
+
+* Listar as informações do topo do arquivo:    
+`head -n1 README.md`  
+*Por padrão, são exibidas as 10 primeiras linhas*
+
+* Imprime o conteúdo por ordem alfabética:   
+`sort <arquivo.txt>`
+
+ * Imprime o conteúdo por ordem alfabética reversa:   
+`sort -r <arquivo.txt>`
+
+* Ordenar iniciando de uma campo específico:  
+`sort -k2 <lista.txt>`  
+A ordenação será feita a partir da segunda linha.
+
+* Exibir listagem sem duplicidade:  
+`uniq <lista.txt>`  
+* Exibir só o que está registrado uma única vez:  
+`uniq -u <lista.txt>`  
+* Exibir registros que se repetem:  
+`uniq -d <lista.txt>`
+* Contar duplicidade:  
+`uniq -c <lista.txt>`  
+* Exemplo utilizando os comandos estudados:  
+`sort alunos3.txt | uniq -c | sort -r | head -n1`
 
 <a id="link2"></a>
 ### Pesquisar dentro de um arquivo
 
-* `cat arquivo.txt | grep <"termo a ser buscado">` O termo a ser busca, no caso precisa ser passado como string, então precisa de aspas.
+* `cat arquivo.txt | grep <"termo a ser buscado">`  
+ O termo a ser buscado, no caso precisa ser passado como string, então precisa de aspas. O pipe '|' pegara a saída do comando `cat` e usará como entrada do como `grep`.
 
 <a id="link3"></a>
 ### Gerenciar situação dos processos
@@ -134,13 +179,14 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 ### Contando caracteres, palarvras de um arquivo e processos em execução
 
 * `wc`, sem parâmetros, ele mostra as linhas, numero de palavras e bytes de um arquivo. 
-* `wc -l`, Conta o total de linhas de um arquivo ou de uma listagem.  
-* `wc -c`, Conta o total de caracters de um arquivo.
-* `wc -w`, Conta o total de palavras de uma arquivos
+* `wc -l`, Contar o total de linhas de um arquivo ou de uma listagem.  
+* `wc -c`, Contar o total de caracters de um arquivo.
+* `wc -w`, Contar o total de palavras de uma arquivos
 
-__Posso combinar com `Grep` e outras instruções. Ex: __ 
+*Posso combinar com `grep` e outras instruções. Ex:*
 
-`ps -e | grep "chrome" | wc -l ` . Aqui estou dizendo, `ps -e` pegue todos os pacotes em execução, `| grep "chrome"` filtre para os que contenham "chrome", e `| wc -l`, conte a quantidade de execução.
+`ps -e | grep "chrome" | wc -l ` .  
+ Aqui estou dizendo, `ps -e` pegue todos os pacotes em execução passa a saída como enrtada para o próximo comaneo, `| grep "chrome"` filtre para os que contenham "chrome", passe como entrada do próximo comando:`| wc -l`, conte a quantidade de execução.
 
 
 <a id="link11"></a>
@@ -169,11 +215,11 @@ __Posso combinar com `Grep` e outras instruções. Ex: __
  
 * Verificar a execução:   
 `ps -e | grep "vsftpd"` .  
-Caso esteja listado como executado, posso pausá-lo. Exemplo:  
+Caso esteja listado como executado, posso pausá-lo. Exemplo:    
 `sudo service vsftpd stop`  
 Se eu quiser inicializá-lo novamente:   
-`sudo service vsftpd start`
-Para ver o status destes serviço:
+`sudo service vsftpd start`  
+Para ver o status destes serviço:  
 `sudo service vsftpd status`
 
 __obs:__ um arquivo de inicialização e desligamento localizado em `/etc/init.d/vsftpd` é executável. Sendo assim, podemos executá-lo diretamente com: 
@@ -182,4 +228,5 @@ __obs:__ um arquivo de inicialização e desligamento localizado em `/etc/init.d
  
  Os scripts dentro de `etc/init.d` são executados sempre que o SO é inicializado. Se quiser que um programa seja inicializado e permaneça rodadndo, basta movê-lo para essa pasta.
 
- *Verificar os serviços neste diretório: `$ ls etc/init.d`
+ *Verificar os serviços neste diretório:   
+ `$ ls etc/init.d`
