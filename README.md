@@ -3,11 +3,15 @@
 
 ### Navegue pelo Índice: :penguin:
 <a name="links"></a>
+
 * [Comando Linux para perdir ajuda](#link-a)
 * [Comandos Linux para Processos](#link1)
 * [Conteúdo de Arquivos](#link-c)
-* [Adicionar ou remover diretórios]("link-b")
+* [Adicionar ou remover diretórios](#link-b)
 * [Pesquisar dentro de um arquivo](#link2)
+* [Traduzir ou deletar caracteres](#link-tr)  
+* [Cortar caracteres](#link-cut)
+* [Comparar Arquivos](#link-dff)
 * [Gerenciar situação dos processos](#link3)
 * [Gerenciar execução dos programas no terminal](#link4)
 * [Permissões e execução de scripts](#link5)
@@ -34,6 +38,7 @@ ex:
 `whatis pwd`
 
 <a id="link-b"></a>
+
 ###  Comando para criar e remover diretório
 * Criar:  `mkdir novo_diretorio`  
 * Remover: `rm novo_diretorio`  
@@ -99,7 +104,52 @@ A ordenação será feita a partir da segunda linha.
 ### Pesquisar dentro de um arquivo
 
 * `cat arquivo.txt | grep <"termo a ser buscado">`  
- O termo a ser buscado, no caso precisa ser passado como string, então precisa de aspas. O pipe '|' pegara a saída do comando `cat` e usará como entrada do como `grep`.
+ O termo a ser buscado, no caso precisa ser passado como string, então precisa de aspas. O pipe '|' pegara a saída do comando `cat` e usará como entrada do como `grep`.  
+
+<a id="link-tr"></a>
+### Traduzir ou deletar caracteres:
+
+* Com o comando `tr` posso trduzir caracteres, como por exemplom passar todos os caracteress do arquivo em maiúsculo.  
+
+Ex:  
+`cat arquivolongo.txt | tr a-z A-Z`  
+* Trocar letras vogais para maiúsculas:
+ `cat arquivo,txt | tr aeiuo AEIOU`  
+* Deletar caracteres:  
+`cat arquivo.txt | tr -d aei` 
+
+* Transformar minúscula em maiúsculas:  
+`echo python | tr [:lower:] [:upper:]`  
+
+* Transformar maiúsculas em minúsculas:  
+`echo PYTHON | tr [:upper:] [:lower:]`
+
+
+<a id="link-cut"></a>
+### Cortar Strings
+
+* Cortar letras da 1º a 5°:  
+`cat arquivos.txt | cut -c1-5`  
+* Cortar letras a partir da 7 posição:   
+`echo ponte preta | cut -c1-6`  
+A saída será: `ponte`  
+* Cortar por campos:  
+ex: `tail /etc/passwd | cut -d ":" -f1,5`  
+
+<a id="link-diff"></a>
+### Comparar arquivos
+
+* Comparar dois arquivos:  
+ex: `diff arquivo1.txt arquivo2.txt`  
+
+A saída aponta as diferenças entre os arquivos com '`<`' (diferença para o arquivo do lado esquerdo) e '`>`'(diferença para o arquivo do lado direito).
+
+* Ignorar os espaços em branco e compara apenas os valores:  
+`diff -w arquivo1.txt arquivo2.txt`  
+
+* Comparar diretórios:  
+`diff -r arquivos copia-exercícios`  
+O retorno dirá quais arquivos existem apenas em seu diretório, quais são únicos em seu diretório e quais são iguais.      
 
 <a id="link3"></a>
 ### Gerenciar situação dos processos
@@ -143,7 +193,7 @@ A ordenação será feita a partir da segunda linha.
 ### Navegando entre diretórios
 
 __obs:__
- `Sempre que quisermos nos referir ao diretório do usuário (/home/nome_do_usuario/), podemos utilizar o ~. `
+ `Sempre que quisermos nos referir ao diretório do usuário (/home/nome_do_usuario/), podemos utilizar o ~ `
 
 * Se estivermos no diretório `usr/bin` e quisermos voltar o diretório usuário, basta digitar: `cd ~`
 
@@ -157,12 +207,15 @@ Ex: `touch tests.py`
 ### Procurar por arquivos ou diretórios:
 * `find <diretório ou arquivo>`
 * Caso eu queira encontra algum caminho de algum arquivo ou programa em específico, posso digitar `which <programa>`. Os programas vão retonar o diretório `/usr/bin/meu_programa`. Os programas dentro deste diretório serão executados em qualquer parte do sistema. Sempre precisa ter permissão de superusuário para mover arquivos para lá.
+
 <a id="link8"></a>
 ### Alterar senhas e logar com outro usuário
 
-+ Para alterar a senha do usuário atual, utilizamos o comando `passwd`. Para alterar a senha do usuário root, utilizamos ``$ sudo passwd`.
++ Para alterar a senha do usuário atual, utilizamos o comando `passwd`. Para alterar a senha do usuário root, utilizamos:  
+`$ sudo passwd`
 
-* Para logarmos com outro usuário, digitamos `su <nome usuário>`
+* Para logarmos com outro usuário, digitamos :  
+`su <nome usuário>`
 
 <a id="link9"></a>
 ### Variáveis de ambiente e PATH
@@ -171,7 +224,8 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 
 * Configurá-la no seguinte arquivo: `gedit .basrc`  
 * Escrever a seguinte linha de configuração para declarar a variável de ambiente: `PATH=${PATH}:home/lucasteixeira/workspace`
-* `env` - Verificar as variáveis do sistema. Para ser mais específico e encontrar apenas uma: `env | grep "PATH"`.
+* `env` - Verificar as variáveis do sistema. Para ser mais específico e encontrar apenas uma:  
+ `env | grep "PATH"`.
 
 *"A variável PATH, guarda informações de onde estão nossos arquivos executáveis para que possamos executar um comando sem a necessidade de digitar o caminho absoluto."* Alura.
 
