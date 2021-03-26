@@ -91,12 +91,16 @@ A ordenação será feita a partir da segunda linha.
 
 * Exibir listagem sem duplicidade:  
 `uniq <lista.txt>`  
+
 * Exibir só o que está registrado uma única vez:  
 `uniq -u <lista.txt>`  
+
 * Exibir registros que se repetem:  
-`uniq -d <lista.txt>`
+`uniq -d <lista.txt>`  
+
 * Contar duplicidade:  
 `uniq -c <lista.txt>`  
+
 * Exemplo utilizando os comandos estudados:  
 `sort alunos3.txt | uniq -c | sort -r | head -n1`
 
@@ -105,6 +109,48 @@ A ordenação será feita a partir da segunda linha.
 
 * `cat arquivo.txt | grep <"termo a ser buscado">`  
  O termo a ser buscado, no caso precisa ser passado como string, então precisa de aspas. O pipe '|' pegara a saída do comando `cat` e usará como entrada do como `grep`.  
+
+ * Pesquisar ignorando letras maiúscula e minúsculas:  
+ `grep -i LUCAS texto*`  
+ O retorno será todo termo com a palavra pesquisada.  
+ Neste exemplo não usamos o pipe para redirecionar a saída do primeiro comando. Fizemos a pesquisa diretamente no arquivo.
+
+ * Contar as palavras dentro do arquivo:   
+`grep -c Ana texto.txt`  
+* Para verificar a ocorrência em todos os arquivos é necessário que ele tenham nomes semelhantes, completo o nome do arquivo com o asterisco(*). Exemplo:   
+`grep -c Ana arquivo*`   
+
+* Pesquisar uma palavra em todos os arquivos dentro do diretório:  
+EX:  
+`grep -r Ana *`
+
+    * Listar apenas os arquivos sem o termo pesquisado:  
+    `grep -rl Ana *`   
+
+* Listar elementos antes de determinado termo(B = before + n° de linhas):  
+`grep -B3 Carlos alunos2.txt`   
+
+* Listar elementos depois de determinado termo(A = after + n° de linhas):  
+`grep -A3 Carlos alunos2.txt`  
+
+
+### Deletar registros e substituir caracteres:  
+* Para deletar registros, posso passar o seguinte comando:  
+`sed '/Eliseu/d' alunos2.txt`  
+Será retornado o items, exceto aquele que pedi para deletar.  
+* Para deletar linhas:  
+`sed '1d' alunos2.txt`  
+Será listado os items exceto a linha 1.  
+__OBS:__ A exclusão não é permanente. Apenas imprime a saída do comando no terminal.   
+
+#### Substituir caracteres:   
+Para ambos exemplo, deve colocar entre aspa e barras, o nome atual/nome a ser substuído. Usar 's' para substituir e 'g' de global, para substituir em todas ocorrências.  
+ 
+* Para substituir itens. EX:  
+`echo "Lucas é pontepreta" | sed 's/pontepreta/pontepretano/'`  
+* Para substituir em todas ocorrências do arquivo:  
+`cat alunos2.txt | sed 's/Ana/Carla/g'`
+
 
 <a id="link-tr"></a>
 ### Traduzir ou deletar caracteres:
