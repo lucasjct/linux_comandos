@@ -1,7 +1,7 @@
 # linux_comandos 
-### Lista de comandos básicos do Linux
+## Lista de comandos básicos do Linux
 
-### Navegue pelo Índice: :penguin:
+## Navegue pelo Índice: :penguin:
 <a name="links"></a>
 
 * [Comando Linux para perdir ajuda](#link-a)
@@ -27,11 +27,11 @@
 
 ***  
 
-Questões importantes
+## Questões importantes
 
 __O que é o Shell?__  
 
-Hardware  <--> Kernel <--> Shell <-->  User :smille  
+Hardware 🎰 <--> Kernel 🐧 <--> Shell 🐚 <-->  User 🙂  
 
 O Shell é o interpretador de comandos do Linux. Quem da entrada com os comandaos (como os listados abaixo) é o usuário. Temos alguns tipos de Shell. Por exemplo: Bash, ZSH, KSH.  
 
