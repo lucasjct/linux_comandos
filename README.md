@@ -22,7 +22,22 @@
 * [Contando caracteres, palarvras de um arquivo e processos em execução](#link10)
 * [Instalação de Programa, gerenciador *apt*](#link11)
 * [Utilizando o `dpkg` para instalar ou remover programas](#link12)
-* [Script de *init* e *service*](#link13)
+* [Script de *init* e *service*](#link13)  
+* [Permissões](#link14)
+
+***  
+
+Questões importantes
+
+__O que é o Shell?__  
+
+Hardware  <--> Kernel <--> Shell <-->  User :smille  
+
+O Shell é o interpretador de comandos do Linux. Quem da entrada com os comandaos (como os listados abaixo) é o usuário. Temos alguns tipos de Shell. Por exemplo: Bash, ZSH, KSH.  
+
+O Shell precisa se comunicar com o Kernel(Linux), este é responsável por fazer a comunicação com o Hardware. No Linux, o Kernel recebe módulos de acordo com as característica do Sistema Operacional. Por exemplo, se quero instalar uma placa de víde ou de som, preciso instalar um módulo no Kernel. Se assemelha às instalações de Drivers no Windows.   
+
+O Shell se comunica com o Kernel, o Kernel conversa com o hardware. O Shell é a interface entre 'nós' e o Kernel + o Hardware.   
 
 
 ***  
@@ -46,22 +61,50 @@ ex:
 * Remover diretorio vazio:  `rmdir novo_diretorio` 
  
 <a id="link1"></a>
-### Comandos Linux para Processos
+### Comandos Linux para Processos  
+  
 
-* `ps -e` Lista todos os procesos em execução. Seria "ps" de process?
+* `top` Este comando exibem um sumário com detalhes sobre os processos em execução.  
 
-* `ps -ef` Lista de maneira detalhada todos os processos
+Ele exibe o `PID` do processo que pode ser capaturado para ser verificado em específico ou para ser 'morto'.  
+Oferece um resumo de utilizaação e diponibilidade de hardware.
+Exibe os porcessos zumbis `Z`, programas inutilizados, mas que consomem recursos.   
 
-* `ps -ef | grep <nome do processo a ser filtrado>`  Pesquisa o processo específico. O grep direciona a saída do comando e filtra por um termo desejado
 
-* `ps axu`  Também retorna detalhadamente as informações dos processos executados.
+* `htop`  Exibe uma lista de processos detalhados e com recursos visuais mais amigáveis.  Precisa ser instalado.
+
+#### Outro comando para processos é o `ps`.
+
+O processo `PID 1` é o primeiro processo que foi startado na máquina. Ele será a saída do comando `ps aux` ou `ps ef`.  
+
+
+* `ps -e` Listar todos os procesos em execução. Seria "ps" de process?
+
+* `ps -ef` Listar de maneira detalhada todos os processos
+
+* `ps -ef | grep <nome do processo a ser filtrado>`  Pesquisar o processo específico. O grep direciona a saída do comando e filtra por um termo desejado
+
+* `ps axu`  Também retorna detalhadamente as informações dos processos executados.  
+
+Existe um diretório onde estão os arquivos dos processos: `cd /proc`. nele temos diretórios de todos os processos.
+O `/proc`, possui informações dinâmicas sobre os processos.   
+
+Temos também informações sobre cpu e memória. Dentro do diretório /proc, exemplo: `cat memoinfo`. A saída são informações sobre a memória.
+
+* `ps axo stat,ppid,pid,comm | grep -w defunct`  Identificar processos zumbis e mortos. 
 
 * `Kill <id do processo>` - Interrompe a execução do processo
 
-* `kill -9 <id do processo>` - Interrompe o processo abruptamente
+* `kill -9 <id do processo>` - Interrompe o processo abruptamente  
 
-<a id="link-c"></a>
+### Verificar tamanho dos diretórios:  
+
+* `sudo du -sh *` - Retornará um listagem com o nome das pastas e o tamnaho de cada uma.
+
+<a id="link-c"></a>   
+
 ### Conteúdo de Arquivos
+
 * Verificar conteúdo de arquivos:  
 `cat  <arquivo.txt>`  
 * Verificar espaços no arquivo:   
@@ -105,6 +148,7 @@ A ordenação será feita a partir da segunda linha.
 `sort alunos3.txt | uniq -c | sort -r | head -n1`
 
 <a id="link2"></a>
+
 ### Pesquisar dentro de um arquivo
 
 * `cat arquivo.txt | grep <"termo a ser buscado">`  
@@ -172,6 +216,7 @@ Ex:
 
 
 <a id="link-cut"></a>
+
 ### Cortar Strings
 
 * Cortar letras da 1º a 5°:  
@@ -183,6 +228,7 @@ A saída será: `ponte`
 ex: `tail /etc/passwd | cut -d ":" -f1,5`  
 
 <a id="link-diff"></a>
+
 ### Comparar arquivos
 
 * Comparar dois arquivos:  
@@ -211,6 +257,7 @@ O retorno dirá quais arquivos existem apenas em seu diretório, quais são úni
 
 
 <a id="link4"></a>
+
 ### TERMINAL - Gerenciar execução dos programas no terminal
 
 * `pstree` - Exibe a árvores de processos.
@@ -236,6 +283,7 @@ O retorno dirá quais arquivos existem apenas em seu diretório, quais são úni
 
 
 <a id="link6"></a>
+
 ### Navegando entre diretórios
 
 __obs:__
@@ -247,9 +295,13 @@ __obs:__
 
 ###  Criar um Arquivo  
 *  `touch` + < nome_do_arquivo.extensão >   
-Ex: `touch tests.py`
+Ex: `touch tests.py`  
+
+### Listar arquivos  
+`ls -lha`. Exibe detalhes sobre os arquivos e pastas de um diretório. Difrente do `ls -la` que também detalha, o `ls -lha` traz mais detalhes ainda.  
 
 <a id="link7"></a>
+
 ### Procurar por arquivos ou diretórios:
 * `find <diretório ou arquivo>`
 * Caso eu queira encontra algum caminho de algum arquivo ou programa em específico, posso digitar `which <programa>`. Os programas vão retonar o diretório `/usr/bin/meu_programa`. Os programas dentro deste diretório serão executados em qualquer parte do sistema. Sempre precisa ter permissão de superusuário para mover arquivos para lá.
@@ -264,6 +316,7 @@ Ex: `touch tests.py`
 `su <nome usuário>`
 
 <a id="link9"></a>
+
 ### Variáveis de ambiente e PATH
 
 Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável de ambiente, podemos executá-la de qualquer lugar do sistema operacional. Por exemplo, criando uma programa em bash, no diretório __workspace__, quando seu diretório for configurado na variável de ambiente, poderemos executá-lo de qualquer lugar sem a necessidade de passar seu caminho absoluto. `PATH` e `HOME`, são dois exemplos de variávei de ambinte
@@ -276,6 +329,7 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 *"A variável PATH, guarda informações de onde estão nossos arquivos executáveis para que possamos executar um comando sem a necessidade de digitar o caminho absoluto."* Alura.
 
 <a id="link10"></a>
+
 ### Contando caracteres, palarvras de um arquivo e processos em execução
 
 * `wc`, sem parâmetros, ele mostra as linhas, numero de palavras e bytes de um arquivo. 
@@ -290,6 +344,7 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 
 
 <a id="link11"></a>
+
 ### Instalação de Programa, gerenciador *apt*
 
 * `apt` é o gerenciador de pacotes do Ubuntu.
@@ -301,7 +356,9 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 * `sudo apt-get install <programa>`, você pode instalar qualquer programa que queira instalar (pode basear na lista retornada com o conando acima).
 
 * `sudo apt-get remove programa`, caso queira remover o programa instalado.
+
 <a id="link12"></a>
+
 ### Utilizando o `dpkg` para instalar ou remover programas
 * Após baixar o progrma possso instalar (é necessário estar no diretório do arquivo) ou deinstalar com os seguinte comandos:  
 `dpkg -i <arquivo.deb>` instalar  
@@ -309,6 +366,7 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
  obs: posso desinstalar com o `apt-get remove` se for da preferência.
 
 <a id="link13"></a>
+
  ### Script de *init* e *service*
 
  * Com o comando `service` posso __parar__ ou __inicializar__ um processo. Exemplo:
