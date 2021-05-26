@@ -61,6 +61,7 @@ ex:
 * Remover diretorio vazio:  `rmdir novo_diretorio` 
  
 <a id="link1"></a>
+
 ### Comandos Linux para Processos  
   
 
@@ -84,7 +85,8 @@ O processo `PID 1` é o primeiro processo que foi startado na máquina. Ele ser�
 
 * `ps -ef | grep <nome do processo a ser filtrado>`  Pesquisar o processo específico. O grep direciona a saída do comando e filtra por um termo desejado
 
-* `ps axu`  Também retorna detalhadamente as informações dos processos executados.  
+* `ps axu`  Também retorna detalhadamente as informações dos processos executados.   
+* `ps auxwww` É listado a linha inteira do processo
 
 Existe um diretório onde estão os arquivos dos processos: `cd /proc`. nele temos diretórios de todos os processos.
 O `/proc`, possui informações dinâmicas sobre os processos.   
@@ -244,16 +246,23 @@ A saída aponta as diferenças entre os arquivos com '`<`' (diferença para o ar
 O retorno dirá quais arquivos existem apenas em seu diretório, quais são únicos em seu diretório e quais são iguais.      
 
 <a id="link3"></a>
+
 ### Gerenciar situação dos processos
 
-* `top` - Lista os processos em execução, o consumos de recursos como cpu, memória ram para cada um deles. 
+* `top` - Detalha os processos em execução, o consumos de recursos como cpu, memória ram para cada um deles. 
 
 * `top -u <id-do-processo>` Exibe as informações de execução de um processo específico.
+
+Caso eu queira atualizar as informações, só pressionar a tecla __barra__.  
+Se quiser matar algum processo, apenas pressione __k__. No cabeçalho será exibido uma mensagem pra você informar o PID do processo que queira encerra. Informe e pressione entre.
 
 * Para alterar o tempo de atualização do `top`, com o `top` em execução, basta pressionar a tecla `d` e passar um novo valor.
 
 * `killall <nome do processo>` Mata o conjunto de processos de um mesmo programa
 * `killall <nome do processo> -9 ` Mato todo os processos de um software de maneira definitiva
+
+Para matar processo com `kill` preciso informar o PID do processo. Para obter o PID, posso utilizar o seguinte comando:  
+`pgrep <nome_processo>`
 
 
 <a id="link4"></a>
@@ -269,6 +278,7 @@ O retorno dirá quais arquivos existem apenas em seu diretório, quais são úni
 
 * Para executar um programa em background e liberar o terminal desde o ínicio, devemos abrí-lo com o __&__ . Por exemplo: `gedit &`
 <a id="link5"></a>
+
 ### Permissões e execução de scripts
 
  * O Linux pode interpretar scripts bash (extensão `.sh`),entre outros programas. Todos arquivos, programas e diretórios, possuem três tipos de permissões: escrita (`w`), leitura (`r`) e execução  (`x`).    
@@ -304,9 +314,15 @@ Ex: `touch tests.py`
 
 ### Procurar por arquivos ou diretórios:
 * `find <diretório ou arquivo>`
-* Caso eu queira encontra algum caminho de algum arquivo ou programa em específico, posso digitar `which <programa>`. Os programas vão retonar o diretório `/usr/bin/meu_programa`. Os programas dentro deste diretório serão executados em qualquer parte do sistema. Sempre precisa ter permissão de superusuário para mover arquivos para lá.
+* Caso eu queira encontra algum caminho de algum arquivo ou programa em específico, posso digitar `which <programa>`. Os programas vão retonar o diretório `/usr/bin/meu_programa`. Os programas dentro deste diretório serão executados em qualquer parte do sistema. Sempre precisa ter permissão de superusuário para mover arquivos para lá.  
+
+Para procurar em toda parte do sistema operacional:  
+* `find / -name <nome_arquivo>` Faz uma busca pelo nome extato do arquivo.  
+* `find / -iname <nome_arquivo>` Ignora case sensitive.
+
 
 <a id="link8"></a>
+
 ### Alterar senhas e logar com outro usuário
 
 + Para alterar a senha do usuário atual, utilizamos o comando `passwd`. Para alterar a senha do usuário root, utilizamos:  
