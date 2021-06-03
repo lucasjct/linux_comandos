@@ -12,7 +12,7 @@
 * [Traduzir ou deletar caracteres](#link-tr)  
 * [Cortar caracteres](#link-cut)
 * [Comparar Arquivos](#link-dff)
-* [Gerenciar situação dos processos](#link3)
+* [Gerenciar dinamicamente situação dos processos](#link3)
 * [Gerenciar execução dos programas no terminal](#link4)
 * [Permissões e execução de scripts](#link5)
 * [Navegando entre diretórios](#link6)
@@ -24,6 +24,7 @@
 * [Utilizando o `dpkg` para instalar ou remover programas](#link12)
 * [Script de *init* e *service*](#link13)  
 * [Permissões](#link14)
+* [Boot e Reboots](#linkboot)
 
 ***  
 
@@ -46,11 +47,38 @@ O Shell se comunica com o Kernel, o Kernel conversa com o hardware. O Shell é a
 
 *  `man` < nome_comando>  
 ex:  
-`mkdir man`   
-* Obter respostas de maneira sintética:    
+`mkdir man`    
+
+* Entender o que significa o comando que você está digitando:    
 `whatis <comando>`  
 ex: 
 `whatis pwd`
+
+* Informações gerais sobre sua máquina(sistema operacional, versão do kernel, processador, nome da máquina, etc):  
+`hostnamectl`  
+A saída será como o exemplo abaixo:   
+
+```
+Static hostname: name-Aspire-A315-54  
+         Icon name: computer-laptop    
+           Chassis: laptop
+        Machine ID: b751fc0a63a341b9a6***eeaec5e26e5  
+           Boot ID: 530d77cfa04e4185be***f17f4848ed5  
+  Operating System: Ubuntu 20.04.2 LTS  
+            Kernel: Linux 5.8.0-53-generic  
+      Architecture: x86-64  
+```  
+* Ao realizar o boot do sistema, são geradas mensagens durante esse processo. Para consultarmos para, por exemplo, ver se há erro na inicialização, podemos digitar:  
+
+`dmesg`  
+
+__Informações dos hardwares e módulos do kernel__  
+
+`lspci -v` Lista informações sobre os hardwares da máquina. 
+
+`lspci -k` LIsta informações sobre módulos do kernel   
+
+`lspci -mm` Lista informações sobre parseadas, mais fácil de serem coletadas.
 
 <a id="link-b"></a>
 
@@ -81,14 +109,16 @@ O processo `PID 1` é o primeiro processo que foi startado na máquina. Ele ser�
 
 * `ps -e` Listar todos os procesos em execução. Seria "ps" de process?
 
-* `ps -ef` Listar de maneira detalhada todos os processos
+* `ps -ef` Listar de maneira detalhada todos os processos, o seu PID, quando foi startado, quanto tempo está up.
 
 * `ps -ef | grep <nome do processo a ser filtrado>`  Pesquisar o processo específico. O grep direciona a saída do comando e filtra por um termo desejado
 
 * `ps axu`  Também retorna detalhadamente as informações dos processos executados.   
-* `ps auxwww` É listado a linha inteira do processo
+* `ps auxwww` É listado a linha inteira do processo  
 
-Existe um diretório onde estão os arquivos dos processos: `cd /proc`. nele temos diretórios de todos os processos.
+ #### O /proc  
+
+Existe um diretório onde estão os arquivos dos processos: `cd /proc`. nele temos diretórios de todos os processos e são gerados durante conforme o uso da sistema operacional. É um diretório virtual, ele é apagado ao desligarmos o computador e criado quando ligamos  
 O `/proc`, possui informações dinâmicas sobre os processos.   
 
 Temos também informações sobre cpu e memória. Dentro do diretório /proc, exemplo: `cat memoinfo`. A saída são informações sobre a memória.
@@ -97,11 +127,17 @@ Temos também informações sobre cpu e memória. Dentro do diretório /proc, ex
 
 * `Kill <id do processo>` - Interrompe a execução do processo
 
-* `kill -9 <id do processo>` - Interrompe o processo abruptamente  
+* `kill -9 <id do processo>` - Interrompe o processo abruptamente    
+
+
 
 ### Verificar tamanho dos diretórios:  
 
-* `sudo du -sh *` - Retornará um listagem com o nome das pastas e o tamnaho de cada uma.
+* `sudo du -sh *` - Retornará um listagem com o nome das pastas e o tamnaho de cada uma. Posso verificar onde posso liberar espaçoes ou não. Se eu digitar `du` dentro de um único diretório, a saída será o conteúdo do diretório específico.  
+
+#### Verificar repartições
+
+ `def` - com df posso verificar o consumo de todas as repartições da máquina.
 
 <a id="link-c"></a>   
 
@@ -199,6 +235,7 @@ Para ambos exemplo, deve colocar entre aspa e barras, o nome atual/nome a ser su
 
 
 <a id="link-tr"></a>
+
 ### Traduzir ou deletar caracteres:
 
 * Com o comando `tr` posso trduzir caracteres, como por exemplom passar todos os caracteress do arquivo em maiúsculo.  
@@ -247,7 +284,7 @@ O retorno dirá quais arquivos existem apenas em seu diretório, quais são úni
 
 <a id="link3"></a>
 
-### Gerenciar situação dos processos
+### Gerenciar dinamicamente a situação dos processos 
 
 * `top` - Detalha os processos em execução, o consumos de recursos como cpu, memória ram para cada um deles. 
 
@@ -282,12 +319,15 @@ Para matar processo com `kill` preciso informar o PID do processo. Para obter o 
 ### Permissões e execução de scripts
 
  * O Linux pode interpretar scripts bash (extensão `.sh`),entre outros programas. Todos arquivos, programas e diretórios, possuem três tipos de permissões: escrita (`w`), leitura (`r`) e execução  (`x`).    
- Para verificar as permissões, basta executar no diretório: `ls -l`. A saída será, ex: `-rw-rw-r-- 1`.
+ Para verificar as permissões, basta executar no diretório: `ls -lha`. A saída será, ex: `-rw-rw-r-- 1`.
 
  __obs:__
  ` O primeiro conjunto de três caracteres representa as permissões do dono do arquivo, o segundo, as permissões do grupo e o terceiro, as permissões dos outros usuários.`
 
- * Para  dar permissões, precisa ser o usuário administrador (que podemos ver ao digitar:  `whoami` ).  As permisões para escrita pode ser concedida, por exemplo: `chmod +w <nome-do-arquivo>`. Para execução seria: `chmod +x <nome-do-arquivo>`. Para retirar a permissão, basta digitar o sinal de subtração, ex: `chmod -w <nome-do-arquivo>`.
+ * Para  dar permissões, precisa ser o usuário administrador (que podemos ver ao digitar:  `whoami` ).  As permisões para escrita pode ser concedida, por exemplo: `chmod +w <nome-do-arquivo>`. Para execução seria: `chmod +x <nome-do-arquivo>`. Para retirar a permissão, basta digitar o sinal de subtração, ex: `chmod -w <nome-do-arquivo>`. Para retirar permissão de execução: `chmod -x <nome-do-arquivo>`. 
+
+ * Permissões para todos arquivos recém criados com `touch arquivo1 arquivo2` dentro de um diretório. Ex: `chmod +x !*`. Este comando pegará todo o patâmetro do comando anterior e irá executar as permissões, que no caso do exemplo, são permissões de execução para todos os arquivos criado com `touch`.
+
 
  * Para executar um arquivo bash sem permisão de execução, devemos digitar `sh nome-do-arquivo`. Após a permissão de execução (`chmod +x <nome-do-arquivo>`), podemos  executá-lo com: "`./<nome-do-arquivo>`".
 
@@ -403,4 +443,42 @@ __obs:__ um arquivo de inicialização e desligamento localizado em `/etc/init.d
  Os scripts dentro de `etc/init.d` são executados sempre que o SO é inicializado. Se quiser que um programa seja inicializado e permaneça rodadndo, basta movê-lo para essa pasta.
 
  *Verificar os serviços neste diretório:   
- `$ ls etc/init.d`
+ `$ ls etc/init.d`   
+
+ __O primeiro comando iniciado:__  
+
+ Importante saber que quando o computador é iniciado e o primeiro programa iniciado é o `init` ele fica em `/sbin/init` e só pode ser acessado pelo root. É o primeiro processo startados pelo kernel, por isso seu `PID` é igual a 1. 
+
+ ### Verificar portas abertas  e processos associados à porta
+
+ * `netstat -atunp` . Se a porta estiver __listen__ significa que ela está recebendo informações. As portas disponíveis estarão como listen. Este comando, portanto, mostra   IPs, e as portas disponíveis ou que já está associadas a um processo.
+
+
+<a id=linkboot></a> 
+
+### Boot e Reboots  
+
+Existem algumas alternativas de desligar ou reiniciar o Linux. Vejamos algumas abaixo:  
+
+`init 0` desligar  
+`init 6` reboot   
+
+`telinit 0` desligar  
+`telinit 6` ligar  
+
+
+`shutdown -r now` reboot  
+`shutdown -h now` desligar   
+
+__Simular desligamento:__  
+
+`shutdown -k h now`  
+
+__Agendar desligamento:__  
+`shutdown -h 10`  desligar em 10 minutos   
+
+`shutdown -r 5`   reiniciar em 5 minutos
+
+__Cancelar desligamento__  
+
+`shutdown -c`
