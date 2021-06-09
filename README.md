@@ -424,8 +424,8 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 * Após baixar o progrma possso instalar (é necessário estar no diretório do arquivo) ou deinstalar com os seguinte comandos:  
 `dpkg -i <arquivo.deb>` instalar  
 `dpkg -r <nome do pacote>` desinstalar  
-`dpkg -purge <nome_pacote>` desinstala o pacote, os biários e os arquivos de configuração de determinado programa.   
- obs: posso desinstalar com o `apt-get remove` se for da preferência.
+`dpkg --purge <nome_pacote>` desinstala o pacote, os biários e os arquivos de configuração de determinado programa.   
+ obs: posso desinstalar com o `apt-get remove --purge` para equivaler ao `dpkg --purge <nome_pacote>`
 
 <a id="link13"></a>
 
