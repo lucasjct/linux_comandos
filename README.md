@@ -401,13 +401,16 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 
 <a id="link11"></a>
 
-### Instalação de Programa, gerenciador *apt*
+### Instalação de Programas, gerenciador *apt*
 
-* `apt` é o gerenciador de pacotes do Ubuntu.
+* `apt` é um dos gerenciadores de pacotes presente nas distribuições __Ubuntu__ e __Debian__. O `apt` busca programas em uma lista de urls de repositórios. Podemos editar essa lista conforme necessitamos. Você pode acessa-la em: `vi /etc/apt/sources.list`  
 
-* `sudo apt-get update` - o gerenciador será atualizado com novas versões e features disponíveis.
 
-* `sudo apt-cache search metrics` - o gerenciado buscará na lista de pacotes qual o mais recomendado para o temos buscado após o `.. search`. Uma listagem será disponiblizada no terminal.
+* `sudo apt-get update` - um lista de repositórios será atualizada com novas versões e ataulizações disponíveis.
+
+* `sudo apt-cache search metrics` - buscará na lista de pacotes qual o mais recomendado para o temos buscado após o `.. search`. Uma listagem será disponiblizada no terminal.
+
+* `sudo apt cache depends <nome_do_programa>` - Será listado as dependências de um pacote e mais sugestões de programas.
 
 * `sudo apt-get install <programa>`, você pode instalar qualquer programa que queira instalar (pode basear na lista retornada com o conando acima).
 
@@ -482,3 +485,17 @@ __Agendar desligamento:__
 __Cancelar desligamento__  
 
 `shutdown -c`
+
+*** 
+
+## Processos possuem estados no Linux
+
+![processos-linux](./image/ProcessState.png)
+
+Processos filhos PPID herdam características dos processo Pai PID.  
+
+__Syscall__  e __strace__
+
+`strace -f ls`  
+`strace -c -f ls`  
+`strace -fp <PID_do_processo>`
