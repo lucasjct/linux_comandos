@@ -419,7 +419,8 @@ Variáveis de ambiente são variáveis globais. Ao configurarmos uma variável d
 <a id="link12"></a>
 
 ### Utilizando o `dpkg` para instalar ou remover programas  
-`dpkg` assim como o `apt` é um entre outros gerenciador de pacotes presente no Ubuntu e Debian. Veja algumas opções:  
+
+`dpkg`, assim como o `apt`, é um entre outros gerenciador de pacotes presente no Ubuntu e Debian. Veja algumas opções:  
 
 * Após baixar o progrma possso instalar (é necessário estar no diretório do arquivo) ou deinstalar com os seguinte comandos:  
 `dpkg -i <arquivo.deb>` instalar  
